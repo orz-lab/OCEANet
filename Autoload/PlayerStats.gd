@@ -5,26 +5,26 @@ var fish_inventory = [
 	{
 		"name": "Cá Chép",
 		"amount": 0,
-		"delta": 5
+		"delta": 10
 	},
 	{
 		"name": "Magikarp",
 		"amount": 0,
-		"delta": 10
+		"delta": 50
 	},
 	{
 		"name": "Cá kho làng Vũ Đại",
 		"amount": 0,
-		"delta": 7
+		"delta": 25
 	},
 	{
 		"name": "Cá độ",
 		"amount": 0,
-		"delta": 15
+		"delta": 100
 	},
 	{
-		"name": "Cá Chà Bạch",
+		"name": "Cá Chà Bặc",
 		"amount": 0,
-		"delta": 6
+		"delta": 200
 	}
 ]
