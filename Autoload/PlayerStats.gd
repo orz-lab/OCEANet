@@ -11,7 +11,11 @@ var fish_inventory = [
 		"amount": 0
 	},
 	{
-		"name": "Cá kho",
+		"name": "Cá kho làng Vũ Đại",
+		"amount": 0
+	},
+	{
+		"name": "Cá độ",
 		"amount": 0
 	}
 ]
