@@ -26,7 +26,8 @@ func _process(delta):
 func _on_price_change_timeout():
 	for id in graph_id:
 		var graph = graph_id[id]
-		var delta_price = rng.randf_range(0,1)
+		var delta_weight = PlayerStats.fish_inventory[id]["delta"]
+		var delta_price = rng.randf_range(0,1 * (delta_weight / 100.0 + 1.0))
 		if rng.randi_range(0,50) == 0:
 			delta_price = rng.randf_range(0,25)
 		
