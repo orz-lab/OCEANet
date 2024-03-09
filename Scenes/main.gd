@@ -105,9 +105,11 @@ func _on_line_edit_gui_input(event):
 
 
 func _on_money_mouse_input(event):
-	last_change = last_change_enum.MONEY
+	if event is InputEventMouseButton and event.pressed:
+		last_change = last_change_enum.MONEY
 
 
 
 func _on_fish_mouse_gui_input(event):
-	last_change = last_change_enum.FISH
+	if event is InputEventMouseButton and event.pressed:
+		last_change = last_change_enum.FISH
