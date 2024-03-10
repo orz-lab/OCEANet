@@ -27,7 +27,7 @@ func _process(delta):
 
 @onready var _fish_input = $Control/InputBox/FishInput/LineEdit
 @onready var _money_input = $Control/InputBox/MoneyInput/LineEdit
-@onready var _fish_option = $Control/PlayerStatsBox/OptionButton
+@onready var _fish_option = $Control/InputBox/OptionButton
 var money_input:float = 0.0
 var fish_input:float = 0.0
 var last_change: last_change_enum = last_change_enum.MONEY

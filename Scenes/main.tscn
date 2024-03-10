@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="2_58pyv"]
 [ext_resource type="FontFile" uid="uid://8fpbpjptcy73" path="res://font/NotoColorEmoji.ttf" id="3_24gqf"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_1n8kb"]
+[sub_resource type="LabelSettings" id="LabelSettings_m6t6t"]
 font = ExtResource("3_24gqf")
 font_size = 50
 
-[sub_resource type="LabelSettings" id="LabelSettings_m6t6t"]
+[sub_resource type="LabelSettings" id="LabelSettings_1n8kb"]
 font = ExtResource("3_24gqf")
 font_size = 50
 
@@ -27,34 +27,15 @@ offset_bottom = 643.0
 
 [node name="Graphs" type="Control" parent="Control"]
 anchors_preset = 0
+offset_top = 81.0
 offset_right = 921.0
 offset_bottom = 613.0
 
-[node name="PlayerStatsBox" type="VBoxContainer" parent="Control"]
+[node name="PlayerStatsBox" type="HBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 927.0
-offset_top = 35.0
-offset_right = 1127.0
-offset_bottom = 286.0
-
-[node name="TotalMoney" type="HBoxContainer" parent="Control/PlayerStatsBox"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/PlayerStatsBox/TotalMoney"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "💲"
-label_settings = SubResource("LabelSettings_1n8kb")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Cash" type="Label" parent="Control/PlayerStatsBox/TotalMoney"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "0"
-autowrap_mode = 1
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 70.0
 
 [node name="TotalFish" type="HBoxContainer" parent="Control/PlayerStatsBox"]
 layout_mode = 2
@@ -75,15 +56,34 @@ theme_override_font_sizes/font_size = 30
 text = "0"
 autowrap_mode = 1
 
-[node name="OptionButton" type="OptionButton" parent="Control/PlayerStatsBox"]
+[node name="TotalMoney" type="HBoxContainer" parent="Control/PlayerStatsBox"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PlayerStatsBox/TotalMoney"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "💲"
+label_settings = SubResource("LabelSettings_1n8kb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cash" type="Label" parent="Control/PlayerStatsBox/TotalMoney"]
+custom_minimum_size = Vector2(150, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "0"
+autowrap_mode = 2
 
 [node name="InputBox" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_left = 926.0
-offset_top = 310.0
+offset_top = 271.0
 offset_right = 1149.0
-offset_bottom = 615.0
+offset_bottom = 599.0
+
+[node name="OptionButton" type="OptionButton" parent="Control/InputBox"]
+layout_mode = 2
 
 [node name="Buy" type="Button" parent="Control/InputBox"]
 custom_minimum_size = Vector2(223, 111)
@@ -125,13 +125,13 @@ text = "SELL"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 931.0
-offset_top = 199.0
+offset_top = 177.0
 offset_right = 1138.0
-offset_bottom = 282.0
+offset_bottom = 260.0
 theme_override_font_sizes/font_size = 60
 text = "OrzLab"
 
-[connection signal="item_selected" from="Control/PlayerStatsBox/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Control/InputBox/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Control/InputBox/Buy" to="." method="_on_buy_pressed"]
 [connection signal="gui_input" from="Control/InputBox/MoneyInput/LineEdit" to="." method="_on_money_mouse_input"]
 [connection signal="text_changed" from="Control/InputBox/MoneyInput/LineEdit" to="." method="_on_money_input_changed"]
