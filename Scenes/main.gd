@@ -14,6 +14,7 @@ func _ready():
 		_fish_option.add_item(fish["name"], id)
 		var graph = graph_template.instantiate()
 		graph.fish_id = id
+		graph.change_price.connect(on_change_price)
 		$Control/Graphs.add_child(graph)
 		graph_id[id] = graph
 		_fish_option.selected = 0
@@ -95,3 +96,13 @@ func _on_money_mouse_input(event):
 func _on_fish_mouse_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
 		last_change = last_change_enum.FISH
+
+func on_change_price(price):
+	if price <= 0.01:
+		$Control/InputBox/Buy.disabled = true
+		$Control/InputBox/Buy.text = "Cá đã phá sản"
+		$Control/InputBox/Buy.add_theme_font_size_override("font_size", 20)
+	else:
+		$Control/InputBox/Buy.disabled = false
+		$Control/InputBox/Buy.text = "BUY"
+		$Control/InputBox/Buy.add_theme_font_size_override("font_size", 75)

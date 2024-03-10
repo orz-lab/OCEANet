@@ -86,9 +86,12 @@ offset_right = 1149.0
 offset_bottom = 615.0
 
 [node name="Buy" type="Button" parent="Control/InputBox"]
+custom_minimum_size = Vector2(223, 111)
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "BUY"
+text_overrun_behavior = 2
+clip_text = true
 
 [node name="MoneyInput" type="HBoxContainer" parent="Control/InputBox"]
 layout_mode = 2
@@ -115,6 +118,7 @@ theme_override_font_sizes/font_size = 25
 text = "Amount"
 
 [node name="Sell" type="Button" parent="Control/InputBox"]
+custom_minimum_size = Vector2(223, 111)
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "SELL"

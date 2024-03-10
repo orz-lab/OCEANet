@@ -11,6 +11,8 @@ var fish_id = null
 
 var rng = RandomNumberGenerator.new()
 
+signal change_price(price)
+
 func _ready():
 	
 	randomize()
@@ -77,6 +79,9 @@ func add_point(value):
 			
 	_chart.queue_redraw()
 	
+	if visible == true:
+		change_price.emit(current_price)
+	
 
 func _on_timer_timeout():
 	for id in range(graph.__x.size()):
@@ -86,7 +91,7 @@ func _on_timer_timeout():
 @onready var _http_request = $HTTPRequest
 
 func _on_update_price_timeout():
-	var url = "https://6346d598-8f4e-4e39-96fb-0da2a26960ff-00-pib8ve4y6fgz.picard.replit.dev/get_price?fish="
+	var url = "https://oceanet-server.onrender.com/get_price?fish="
 	if "api" in PlayerStats.fish_inventory[fish_id]:
 		var result = _http_request.request(url + PlayerStats.fish_inventory[fish_id]["api"])
 		if result == OK:
@@ -104,12 +109,15 @@ func make_new_price():
 	var current_price = current_price
 	current_price = max(0, current_price + delta_price)
 	add_point(current_price)
-
+	$Label.text = "Offline"
+	$Label.set("theme_override_colors/font_color", Color.RED)
 
 func _on_http_request_request_completed(result, response_code, headers, body):
 	var data = JSON.new().parse_string(body.get_string_from_utf8())
-	#print(data)
-	if "price" in data:
+	print(body.get_string_from_utf8())
+	if not data == null and "price" in data:
 		add_point(data["price"])
-	else:
-		make_new_price()
+		$Label.text = "Online"
+		$Label.set("theme_override_colors/font_color", Color.GREEN)
+		return
+	make_new_price()
