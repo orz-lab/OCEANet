@@ -7,9 +7,15 @@ var graph: Function
 var MAX_TIME = 50
 var cp: ChartProperties = ChartProperties.new()
 var current_price: float = 50
-var name_fish = ""
+var fish_id = null
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
+	
+	randomize()
+	rng.randomize()
+	
 	# Let's create our @x values
 	var x: PackedFloat32Array = [0, 0]
 	
@@ -25,7 +31,7 @@ func _ready():
 	cp.colors.ticks = Color("#283442")
 	cp.colors.text = Color.WHITE_SMOKE
 	cp.draw_bounding_box = false
-	cp.title = "Giá của loài cá " + name_fish 
+	cp.title = "Giá của loài cá " + PlayerStats.fish_inventory[fish_id]["name"] 
 	cp.x_label = "Time"
 	cp.y_label = "Price"
 	cp.x_scale = 5
@@ -76,3 +82,34 @@ func _on_timer_timeout():
 	for id in range(graph.__x.size()):
 		graph.__x[id] -= 1
 	_chart.queue_redraw()
+
+@onready var _http_request = $HTTPRequest
+
+func _on_update_price_timeout():
+	var url = "https://6346d598-8f4e-4e39-96fb-0da2a26960ff-00-pib8ve4y6fgz.picard.replit.dev/get_price?fish="
+	if "api" in PlayerStats.fish_inventory[fish_id]:
+		var result = _http_request.request(url + PlayerStats.fish_inventory[fish_id]["api"])
+		if result == OK:
+			return
+	make_new_price()
+
+func make_new_price():
+	var delta_price = rng.randf_range(0,1)
+	if rng.randi_range(0,50) == 0:
+		delta_price = rng.randf_range(0,25)
+	
+	if rng.randf_range(-100, 100) < 0:
+		delta_price *= -1
+	
+	var current_price = current_price
+	current_price = max(0, current_price + delta_price)
+	add_point(current_price)
+
+
+func _on_http_request_request_completed(result, response_code, headers, body):
+	var data = JSON.new().parse_string(body.get_string_from_utf8())
+	#print(data)
+	if "price" in data:
+		add_point(data["price"])
+	else:
+		make_new_price()

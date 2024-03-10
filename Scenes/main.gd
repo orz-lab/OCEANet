@@ -1,6 +1,5 @@
 extends Node2D
 
-var weight_1:float = 0
 var graph_id = {}
 
 var graph_template = preload("res://Scenes/Graph/Graph.tscn")
@@ -14,7 +13,7 @@ func _ready():
 		var fish = PlayerStats.fish_inventory[id].duplicate()
 		_fish_option.add_item(fish["name"], id)
 		var graph = graph_template.instantiate()
-		graph.name_fish = fish["name"]
+		graph.fish_id = id
 		$Control/Graphs.add_child(graph)
 		graph_id[id] = graph
 		_fish_option.selected = 0
@@ -23,25 +22,6 @@ func _ready():
 func _process(delta):
 	_set_input()
 
-func _on_price_change_timeout():
-	for id in graph_id:
-		var graph = graph_id[id]
-		var delta_weight = PlayerStats.fish_inventory[id]["delta"]
-		delta_weight = (delta_weight / 100.0 + 1.0)
-		var delta_price = rng.randf_range(0,1 * delta_weight)
-		if rng.randi_range(0,50) == 0:
-			delta_price = rng.randf_range(0,25 * delta_weight)
-		
-		#print(weight_1)
-		#print(-100 + weight_1, " ", 100 - weight_1)
-		if rng.randf_range(-100 - weight_1, 100 + weight_1) < 0:
-			delta_price *= -1
-		
-		weight_1 += delta_price
-		var current_price = graph_id[id].current_price
-		current_price = max(0, current_price + delta_price)
-		#print(id, " ", current_price)
-		graph.add_point(current_price)
 
 
 @onready var _fish_input = $Control/InputBox/FishInput/LineEdit

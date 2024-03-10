@@ -119,10 +119,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "SELL"
 
-[node name="price_change" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
-
 [node name="Label" type="Label" parent="."]
 offset_left = 931.0
 offset_top = 199.0
@@ -138,4 +134,3 @@ text = "OrzLab"
 [connection signal="gui_input" from="Control/InputBox/FishInput/LineEdit" to="." method="_on_fish_mouse_gui_input"]
 [connection signal="text_changed" from="Control/InputBox/FishInput/LineEdit" to="." method="_on_fish_input_changed"]
 [connection signal="pressed" from="Control/InputBox/Sell" to="." method="_on_sell_pressed"]
-[connection signal="timeout" from="price_change" to="." method="_on_price_change_timeout"]
