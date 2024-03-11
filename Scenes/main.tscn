@@ -53,8 +53,6 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
-text = "0"
-autowrap_mode = 1
 
 [node name="TotalMoney" type="HBoxContainer" parent="Control/PlayerStatsBox"]
 layout_mode = 2
@@ -73,7 +71,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "0"
-autowrap_mode = 2
 
 [node name="InputBox" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -131,6 +128,10 @@ offset_bottom = 260.0
 theme_override_font_sizes/font_size = 60
 text = "OrzLab"
 
+[node name="update_price" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
 [connection signal="item_selected" from="Control/InputBox/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Control/InputBox/Buy" to="." method="_on_buy_pressed"]
 [connection signal="gui_input" from="Control/InputBox/MoneyInput/LineEdit" to="." method="_on_money_mouse_input"]
@@ -138,3 +139,4 @@ text = "OrzLab"
 [connection signal="gui_input" from="Control/InputBox/FishInput/LineEdit" to="." method="_on_fish_mouse_gui_input"]
 [connection signal="text_changed" from="Control/InputBox/FishInput/LineEdit" to="." method="_on_fish_input_changed"]
 [connection signal="pressed" from="Control/InputBox/Sell" to="." method="_on_sell_pressed"]
+[connection signal="timeout" from="update_price" to="." method="_on_update_price_timeout"]

@@ -5,7 +5,12 @@ var graph_id = {}
 var graph_template = preload("res://Scenes/Graph/Graph.tscn")
 var rng = RandomNumberGenerator.new()
 
+var fishes_api = []
+var api2id = {}
+
 func _ready():
+	Network._on_update_price.connect(_on_update_price)
+	
 	randomize()
 	rng.randomize()
 	
@@ -16,14 +21,16 @@ func _ready():
 		graph.fish_id = id
 		graph.change_price.connect(on_change_price)
 		$Control/Graphs.add_child(graph)
+		if fish.has("api"):
+			fishes_api.append(fish["api"])
+			api2id[fish["api"]] = id
 		graph_id[id] = graph
 		_fish_option.selected = 0
 		_on_option_button_item_selected(0)
+
 		
 func _process(delta):
 	_set_input()
-
-
 
 @onready var _fish_input = $Control/InputBox/FishInput/LineEdit
 @onready var _money_input = $Control/InputBox/MoneyInput/LineEdit
@@ -106,3 +113,11 @@ func on_change_price(price):
 		$Control/InputBox/Buy.disabled = false
 		$Control/InputBox/Buy.text = "BUY"
 		$Control/InputBox/Buy.add_theme_font_size_override("font_size", 75)
+
+func _on_update_price_timeout():
+	Network.ask_price(fishes_api)
+	
+func _on_update_price(list_price):
+	for fish in list_price:
+		for fish_name in fish:
+			graph_id[api2id[fish_name]]._on_update_price(fish[fish_name])
