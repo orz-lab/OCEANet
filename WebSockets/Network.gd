@@ -15,7 +15,7 @@ func _ready():
 	_network_client.error.connect(_handle_network_error)
 	_network_client.data.connect(_handle_network_data)
 	add_child(_network_client)
-	_network_client.connect_to_server("oceanet-server.onrender.com", 8081)
+	_network_client.connect_to_server("34.228.63.232", 8081)
 
 signal _on_update_price(fishes_price)
 
