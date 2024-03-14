@@ -9,6 +9,9 @@ var fishes_api = []
 var api2id = {}
 
 func _ready():
+	if Network.is_connected:
+		$Control/PlayerStatsBox/username.text = PlayerStats.username
+	
 	Network._on_update_price.connect(_on_update_price)
 	
 	randomize()

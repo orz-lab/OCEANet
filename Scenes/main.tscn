@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvytkhrnnaecs"]
+[gd_scene load_steps=7 format=3 uid="uid://dvytkhrnnaecs"]
 
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_lq4tg"]
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="2_58pyv"]
 [ext_resource type="FontFile" uid="uid://8fpbpjptcy73" path="res://font/NotoColorEmoji.ttf" id="3_24gqf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_plwox"]
+font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_m6t6t"]
 font = ExtResource("3_24gqf")
@@ -36,6 +39,11 @@ layout_mode = 0
 offset_top = 1.0
 offset_right = 1152.0
 offset_bottom = 70.0
+
+[node name="username" type="Label" parent="Control/PlayerStatsBox"]
+layout_mode = 2
+text = "Offline Account"
+label_settings = SubResource("LabelSettings_plwox")
 
 [node name="TotalFish" type="HBoxContainer" parent="Control/PlayerStatsBox"]
 layout_mode = 2
