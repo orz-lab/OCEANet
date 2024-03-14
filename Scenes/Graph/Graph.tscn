@@ -26,10 +26,4 @@ layout_mode = 2
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_top = -23.0
-offset_right = 77.0
-text = "Connecting"
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

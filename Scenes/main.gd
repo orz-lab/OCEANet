@@ -31,6 +31,13 @@ func _ready():
 		
 func _process(delta):
 	_set_input()
+	
+	if Network.is_connected:
+		$ConnectStat.text = "Online Mode"
+		$ConnectStat.set("theme_override_colors/font_color", Color.GREEN)
+	else:
+		$ConnectStat.text = "Offine Mode"
+		$ConnectStat.set("theme_override_colors/font_color", Color.RED)
 
 @onready var _fish_input = $Control/InputBox/FishInput/LineEdit
 @onready var _money_input = $Control/InputBox/MoneyInput/LineEdit
@@ -115,7 +122,8 @@ func on_change_price(price):
 		$Control/InputBox/Buy.add_theme_font_size_override("font_size", 75)
 
 func _on_update_price_timeout():
-	Network.ask_price(fishes_api)
+	if Network.is_connected:
+		Network.ask_price(fishes_api)
 	
 func _on_update_price(list_price):
 	for fish in list_price:

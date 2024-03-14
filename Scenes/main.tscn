@@ -132,6 +132,12 @@ text = "OrzLab"
 wait_time = 0.2
 autostart = true
 
+[node name="ConnectStat" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 61.0
+offset_right = 42.0
+offset_bottom = 84.0
+
 [connection signal="item_selected" from="Control/InputBox/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="Control/InputBox/Buy" to="." method="_on_buy_pressed"]
 [connection signal="gui_input" from="Control/InputBox/MoneyInput/LineEdit" to="." method="_on_money_mouse_input"]

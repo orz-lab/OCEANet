@@ -85,6 +85,9 @@ func add_point(value):
 func _on_timer_timeout():
 	for id in range(graph.__x.size()):
 		graph.__x[id] -= 1
+	
+	if Network.is_connected == false:
+		make_new_price()
 	_chart.queue_redraw()
 
 
@@ -99,10 +102,6 @@ func make_new_price():
 	var current_price = current_price
 	current_price = max(0, current_price + delta_price)
 	add_point(current_price)
-	$Label.text = "Offline"
-	$Label.set("theme_override_colors/font_color", Color.RED)
 
 func _on_update_price(price):
 	add_point(price)
-	$Label.text = "Online"
-	$Label.set("theme_override_colors/font_color", Color.GREEN)
