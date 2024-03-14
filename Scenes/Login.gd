@@ -21,6 +21,7 @@ func _on_connect_pressed():
 func _on_offline_pressed():
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 	
+	
 func _on_connected():
 	$VBoxContainer/Buttons/Login.disabled = false
 	$VBoxContainer/ip/Connect.text = "Connected"
