@@ -66,6 +66,8 @@ func _set_input():
 			money_input = fish_input * graph_id[_fish_option.selected].current_price
 			_money_input.text = str(money_input)
 	
+			print(fish_input, graph_id[_fish_option.selected].current_price)
+	
 	$Control/PlayerStatsBox/TotalMoney/Cash.text = str("%.2f" % round_to_dec(PlayerStats.total_money))
 	$Control/PlayerStatsBox/TotalFish/Fish.text = str("%.2f" % round_to_dec(PlayerStats.fish_inventory[_fish_option.selected]["amount"]))
 

@@ -109,6 +109,7 @@ text = "Money"
 [node name="LineEdit" type="LineEdit" parent="Control/InputBox/MoneyInput"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
 [node name="FishInput" type="HBoxContainer" parent="Control/InputBox"]
 layout_mode = 2
@@ -116,6 +117,7 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="Control/InputBox/FishInput"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 
 [node name="Label" type="Label" parent="Control/InputBox/FishInput"]
 layout_mode = 2
