@@ -19,6 +19,9 @@ func _process(delta):
 	var state = _client.get_ready_state()
 	
 	if state == WebSocketPeer.STATE_OPEN:
+		if not is_connected:
+			connected.emit()
+			is_connected = true
 		while _client.get_available_packet_count():
 			_on_data()
 	elif state == WebSocketPeer.STATE_CLOSING:
@@ -36,9 +39,6 @@ func connect_to_server(hostname: String, port: int) -> void:
 		print("Unable to connect")
 		set_process(false)
 		emit_signal("error")
-	else:
-		emit_signal("connected")
-		is_connected = true
 
 
 func send_packet(packet: Packet):

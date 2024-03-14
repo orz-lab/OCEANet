@@ -51,6 +51,9 @@ enum last_change_enum{
 	FISH
 }
 
+func round_to_dec(num, digit = 2):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
 func _set_input():
 	match last_change:
 		last_change_enum.MONEY:
@@ -60,8 +63,8 @@ func _set_input():
 			money_input = fish_input * graph_id[_fish_option.selected].current_price
 			_money_input.text = str(money_input)
 	
-	$Control/PlayerStatsBox/TotalMoney/Cash.text = str("%.2f" % PlayerStats.total_money)
-	$Control/PlayerStatsBox/TotalFish/Fish.text = str("%.2f" % PlayerStats.fish_inventory[_fish_option.selected]["amount"])
+	$Control/PlayerStatsBox/TotalMoney/Cash.text = str("%.2f" % round_to_dec(PlayerStats.total_money))
+	$Control/PlayerStatsBox/TotalFish/Fish.text = str("%.2f" % round_to_dec(PlayerStats.fish_inventory[_fish_option.selected]["amount"]))
 
 func _on_money_input_changed(new_text):
 	if not new_text.is_valid_float():
@@ -77,19 +80,21 @@ func _on_fish_input_changed(new_text):
 	fish_input = float(new_text)
 	last_change = last_change_enum.FISH
 
+
 func _on_sell_pressed():
-	var fish_amount = PlayerStats.fish_inventory[_fish_option.selected]["amount"]
+	var fish_amount = round_to_dec(PlayerStats.fish_inventory[_fish_option.selected]["amount"])
 	if fish_amount - fish_input >= 0:
-		fish_amount -= fish_input
+		fish_amount -= round_to_dec(fish_input)
 		PlayerStats.total_money += money_input
 	
 	PlayerStats.fish_inventory[_fish_option.selected]["amount"] = fish_amount
 
 
 func _on_buy_pressed():
-	if PlayerStats.total_money - money_input >= 0:
-		PlayerStats.total_money -= money_input
-		PlayerStats.fish_inventory[_fish_option.selected]["amount"] += fish_input
+	var money = round_to_dec(money_input)
+	if PlayerStats.total_money - money >= 0:
+		PlayerStats.total_money -= money
+		PlayerStats.fish_inventory[_fish_option.selected]["amount"] += round_to_dec(fish_input)
 
 
 func _on_option_button_item_selected(index):
@@ -124,8 +129,13 @@ func on_change_price(price):
 func _on_update_price_timeout():
 	if Network.is_connected:
 		Network.ask_price(fishes_api)
+		Network.update_inventory()
+		
 	
 func _on_update_price(list_price):
 	for fish in list_price:
 		for fish_name in fish:
 			graph_id[api2id[fish_name]]._on_update_price(fish[fish_name])
+
+
+	

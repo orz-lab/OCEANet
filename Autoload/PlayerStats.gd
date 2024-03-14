@@ -1,5 +1,7 @@
 extends Node
 
+var username = ""
+var password = ""
 var total_money:float = 1000
 var fish_inventory = [
 	{
@@ -28,3 +30,4 @@ var fish_inventory = [
 		"api": "cachabac",
 	},
 ]
+
