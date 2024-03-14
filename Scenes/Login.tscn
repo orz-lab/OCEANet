@@ -24,7 +24,6 @@ text = "username"
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/username"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "admin"
 
 [node name="password" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -36,7 +35,6 @@ text = "password"
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/password"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "admin"
 
 [node name="ip" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -48,7 +46,7 @@ text = "Server"
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/ip"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "127.0.0.1"
+text = "oceanet-server.orzoj.dev"
 
 [node name="Connect" type="Button" parent="VBoxContainer/ip"]
 layout_mode = 2

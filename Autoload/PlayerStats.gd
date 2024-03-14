@@ -2,7 +2,7 @@ extends Node
 
 var username = ""
 var password = ""
-var total_money:float = 1000
+var total_money:float = 500
 var fish_inventory = [
 	{
 		"name": "Cá Chép",
